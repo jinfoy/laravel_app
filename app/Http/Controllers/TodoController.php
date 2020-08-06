@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Todo;
+use App\User;
 use Auth;
 
 class TodoController extends Controller
@@ -32,8 +33,9 @@ class TodoController extends Controller
         //DBからの全件取得(SELECT * FROM todos)
         // dd(compact('todos'));
         $todos = $this->todo->getByUserId(Auth::id());
+        $user = Auth::user();
         // dd(compact('todos'));
-        return view('todo.index', compact('todos'));
+        return view('todo.index', compact('todos', 'user'));
         //compact view側へ渡したい変数(todos)を記述
     }
 
